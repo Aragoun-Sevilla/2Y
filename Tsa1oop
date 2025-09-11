@@ -6,23 +6,21 @@ public class Aragourn {
 
         // Resume
         System.out.println("===== My Resume =====");
-        System.out.println("Name: Juan Dela Cruz");
-        System.out.println("Address: Quezon City, Philippines");
-        System.out.println("Email: juan@example.com");
-        System.out.println("Phone: +63 912 345 6789");
+        System.out.println("Name: Aragourn Bhoromir G Sevilla");
+        System.out.println("Address: Caloocan City, Philippines");
+        System.out.println("Email: aragourn111sevilla@gmail.com");
+        System.out.println("Phone: +63 977 602 3160");
         System.out.println();
         System.out.println("Education:");
-        System.out.println("- Bachelor of Science in Computer Science");
-        System.out.println("  University of the Philippines, 2025");
+        System.out.println("- University of the east graduate 2024");
+        System.out.println("- Far Eastern University 2025");
         System.out.println();
         System.out.println("Skills:");
-        System.out.println("- Java, C++, Python");
-        System.out.println("- Problem Solving & Algorithms");
-        System.out.println("- Web Development (HTML, CSS, JS)");
+        System.out.println("- Java, C++");
+        System.out.println("- Problem Solving");
         System.out.println();
         System.out.println("Experience:");
-        System.out.println("- Intern, Software Development at XYZ Company");
-        System.out.println("- Freelance Web Developer");
+        System.out.println("- Layout Artist in Go2Print company");
         System.out.println("======================");
     }
 }
