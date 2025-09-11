@@ -1,0 +1,28 @@
+public class Aragourn {
+    public static void main(String[] args) {
+        // Welcome message
+        System.out.println("Welcome to Java Programming Aragourn!!");
+        System.out.println();
+
+        // Resume
+        System.out.println("===== My Resume =====");
+        System.out.println("Name: Juan Dela Cruz");
+        System.out.println("Address: Quezon City, Philippines");
+        System.out.println("Email: juan@example.com");
+        System.out.println("Phone: +63 912 345 6789");
+        System.out.println();
+        System.out.println("Education:");
+        System.out.println("- Bachelor of Science in Computer Science");
+        System.out.println("  University of the Philippines, 2025");
+        System.out.println();
+        System.out.println("Skills:");
+        System.out.println("- Java, C++, Python");
+        System.out.println("- Problem Solving & Algorithms");
+        System.out.println("- Web Development (HTML, CSS, JS)");
+        System.out.println();
+        System.out.println("Experience:");
+        System.out.println("- Intern, Software Development at XYZ Company");
+        System.out.println("- Freelance Web Developer");
+        System.out.println("======================");
+    }
+}
