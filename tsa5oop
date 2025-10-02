@@ -1,1 +1,37 @@
+A zoo contains a large number of different types of animal. All animals respond to a message 'talk()' by announcing what they are and their name and age. Each type of animal is represented by a different sub-class of the animal class.
+The zoo itself provides methods to add and subtract animals and responds to the message 'feedingTime()' by sending the message talk to all the animals.
+Animal classes
+Create an Animal class and appropriate sub-classes for say Lion, Tiger etc.
+Zoo class
+Create a Zoo class can contain a number of animals and provides methods to add and remove animals as well as responding to the method 'feedingTime()'.
+
+
+
+Menu class
+As this apllication, like so many, will require a menu for the user to drive it, create a Menu class which has a constructor which enables a set of menu item strings to be specified and a method which displays the menu and returns the user choice as an integer. This method should perform some error checking on the user input.
+Application class
+Create a suitable application class with a main method which provides a menu for user interaction and interacts with a zoo object.
+
+2. Write a grading program for each class with the following grading policies:
+
+There are two quizzes, each graded on the basis of 10 points.
+
+b. There is one midterm exam and one final exam, each graded on the basis of 100 points.
+
+c. The final exam counts for 50% of the grade, the midterm counts for 25%, and the two quizzes together count for a total of 25%.(Do not forget to normalize the quiz scores. They should be converted to a percent before they are average in.) Any grade of 90 or more is an A, any grade of 80 or more (but less than 90 is B, any grade of 70 or more (but less than 80) is a C, any grade of 60 or more (but less than 70) is a D, and any grade below 60 is an F. The program will read in the student’s scores and output the student’s record, which consists of two quiz and two exam scores as well as the student’s overall numeric score for the entire course and final letter grade. Define and use a class for the student record. The class should have instance variables for the quizzes, midterm, final, course overall numeric score, and course final letter grade. The overall numeric score is a number in the range 0 to 100, which represents the weighted average of the student’s work. The class should have input and output methods. The input method should not ask for the final numeric grade nor should it ask for the final letter grade. The class should have methods to compute the overall numeric grade and the final letter grade. These last two methods will be void methods that set the appropriate instance variables. Remember, one method can call another method. If you prefer, you can define a single method that sets both the overall numeric score and the
+final letter grade, but if you do this, use a helping method. Your program should use all the methods we discussed. Your class should have a reasonable set of accessor and mutator methods, whether or not your program uses them. You may add other methods if you wish.
+
+
+
+3. Create a class that graphs the grade distribution (number of A’s, B’s, C’s, D’s, and
+F’s) horizontally by printing lines with proportionate numbers of asterisks  corresponding to the percentage of grades in each category. Write methods to set the number of each letter grade; red the number of each letter grade, return the total number of grades, return the percent of each letter grade as a whole number between 0 and 100, inclusive; and draw the graph. Set it up so that 50 asterisks correspond to 100% (each one corresponds 2%), include a scale on the horizontal axis indicating each 10% increment from 0 to 100%, and label each line with its letter grade. For example, if there are 1 A’s, 4 B’s, 6 C’s, 2 D’s and 1 F, the total number of grades is 14, the percentage of A’s is 7, percentage of B’s is 29, percentage of C’s is 43, percentage of D’s is 14, and percentage of F’s is 7. The A row would contain 4 asterisks (7% of 50 rounded to the nearest the B row 14, the C row 21, the D row 7, and the F row 4, so the graph would look like this
+
+0 10 20 30 40 50 60 70 80 90 100
+***************************************************
+**** A
+************** B
+********************* C
+******* D
+**** F
+
 
