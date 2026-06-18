@@ -1,0 +1,155 @@
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+namespace MyGame.Desktop
+{
+    public class Game1 : Game
+    {
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private Vector2 _samuraiPos = new Vector2(120, 280);   // LEFT 
+        private Vector2 _zombiePos = new Vector2(660, 250);   // RIGHT 
+        private const float MoveSpeed = 4f;
+
+        private SpriteEffects _samuraiFlip = SpriteEffects.None;
+        private SpriteEffects _zombieFlip = SpriteEffects.None;
+        //Zombie
+        private Texture2D[] _zombieFrames;
+        private int _zombieFrame;
+        private double _zombieTimer;
+        private const double ZombieFrameTime = 0.01;
+        
+        //Samurai
+        private Texture2D _samuraiSheet;
+        private int _samuraiFrame;
+        private double _samuraiTimer;
+        private const double SamuraiFrameTime = 0.10;
+        private const int FrameWidth = 128;
+        private const int FrameHeight = 128;
+        private const int FrameCount = 9;
+        public Game1()
+        {
+            _graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+            IsMouseVisible = true;
+        }
+
+        protected override void Initialize()
+        {
+            // TODO: Add your initialization logic here
+            _graphics.PreferredBackBufferWidth = 1000;
+            _graphics.PreferredBackBufferHeight = 540;
+            _graphics.ApplyChanges();
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _zombieFrames = new Texture2D[10];
+            for (int i = 0; i < 10; i++)
+                _zombieFrames[i] = Content.Load<Texture2D>($"zombie_walk_{i + 1}");
+
+            _samuraiSheet = Content.Load<Texture2D>("samurai_walk");
+            // TODO: use this.Content to load your game content here
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                Exit();
+            KeyboardState kb = Keyboard.GetState();
+            // zombie
+            double dt = gameTime.ElapsedGameTime.TotalSeconds;
+            _zombieTimer += dt;
+            if (_zombieTimer >= ZombieFrameTime)
+            {
+                _zombieTimer -= ZombieFrameTime ;
+                _zombieFrame = (_zombieFrame + 1) % _zombieFrames.Length;
+            }
+
+            //samurai
+            _samuraiTimer += dt;
+            if (_samuraiTimer >= SamuraiFrameTime)
+            {
+                _samuraiTimer -= SamuraiFrameTime;
+                _samuraiFrame = (_samuraiFrame + 1) % FrameCount;
+            }
+            // Samurai — WASD 
+            Vector2 sDir = Vector2.Zero;
+            if (kb.IsKeyDown(Keys.A)) sDir.X -= 1;
+            if (kb.IsKeyDown(Keys.D)) sDir.X += 1;
+            if (kb.IsKeyDown(Keys.W)) sDir.Y -= 1;
+            if (kb.IsKeyDown(Keys.S)) sDir.Y += 1;
+            _samuraiPos += sDir * MoveSpeed;
+
+            // Zombie — Arrow keys 
+            Vector2 zDir = Vector2.Zero;
+            if (kb.IsKeyDown(Keys.Left)) zDir.X -= 1;
+            if (kb.IsKeyDown(Keys.Right)) zDir.X += 1;
+            if (kb.IsKeyDown(Keys.Up)) zDir.Y -= 1;
+            if (kb.IsKeyDown(Keys.Down)) zDir.Y += 1;
+            _zombiePos += zDir * MoveSpeed;
+
+            _samuraiPos.X = MathHelper.Clamp(_samuraiPos.X, 0, 1000 - 256);  // 128 × 2.0 scale 
+            _samuraiPos.Y = MathHelper.Clamp(_samuraiPos.Y, 0, 540 - 256);
+            _zombiePos.X = MathHelper.Clamp(_zombiePos.X, 0, 1000 - 193);  // ≈ 430 × 0.45 
+            _zombiePos.Y = MathHelper.Clamp(_zombiePos.Y, 0, 540 - 234);   // ≈ 519 × 0.45
+
+            
+            bool samuraiMoving = sDir != Vector2.Zero;
+            bool zombieMoving = zDir != Vector2.Zero;
+
+            if (sDir.X < 0) _samuraiFlip = SpriteEffects.FlipHorizontally;
+            else if (sDir.X > 0) _samuraiFlip = SpriteEffects.None;
+            if (zDir.X < 0) _zombieFlip = SpriteEffects.FlipHorizontally;
+            else if (zDir.X > 0) _zombieFlip = SpriteEffects.None;
+
+            if (samuraiMoving)
+            {
+                _samuraiTimer += dt;
+                if (_samuraiTimer >= SamuraiFrameTime)
+                {
+                    _samuraiTimer -= SamuraiFrameTime;
+                    _samuraiFrame = (_samuraiFrame + 1) % FrameCount;
+                }
+            }
+            else { _samuraiFrame = 0; }
+
+            if (zombieMoving)
+            {
+                _zombieTimer += dt;
+                if (_zombieTimer >= ZombieFrameTime)
+                {
+                    _zombieTimer -= ZombieFrameTime; _zombieFrame =
+                (_zombieFrame + 1) % _zombieFrames.Length;
+                }
+            }
+            else { _zombieFrame = 0; }
+
+            base.Update(gameTime);
+
+        }
+
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            // TODO: Add your drawing code here
+            _spriteBatch.Begin();
+
+            Rectangle src = new Rectangle(_samuraiFrame * FrameWidth, 0, FrameWidth, FrameHeight);
+            _spriteBatch.Draw(_samuraiSheet, _samuraiPos, src, Color.White,
+            0f, Vector2.Zero, 2.0f, _samuraiFlip, 0f);
+            _spriteBatch.Draw(_zombieFrames[_zombieFrame], _zombiePos, null, Color.White,
+            0f, Vector2.Zero, 0.25f, _zombieFlip, 0f);
+
+            _spriteBatch.End();
+
+            base.Draw(gameTime);
+
+        }
+    }
+}
